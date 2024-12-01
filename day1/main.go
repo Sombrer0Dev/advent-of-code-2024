@@ -4,12 +4,12 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 
 	"github.com/Sombrer0Dev/advent-of-code-2024/day1/part1"
 	"github.com/Sombrer0Dev/advent-of-code-2024/day1/part2"
-	"github.com/Sombrer0Dev/advent-of-code-2024/utils"
 )
 
 const day = "day1"
@@ -27,17 +27,28 @@ func main() {
 	flag.BoolVar(&sample, "sample", false, "Use sample input?")
 	flag.Parse()
 
+	var file *os.File
+	var err error
 	if sample {
-		scanner = utils.ReadInput(path + day + "/sample_" + strconv.Itoa(part))
+		file, err = os.Open(path + day + "/sample_" + strconv.Itoa(part))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
-		scanner = utils.ReadInput(path + day + "/input")
+		file, err = os.Open(path + day + "/input")
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
+	defer file.Close()
+	scanner = bufio.NewScanner(file)
 
 	switch part {
 	case 1:
-		part1.Solve(scanner)
+		fmt.Println("Part1")
+		fmt.Printf("Answer: %d \n", part1.Solve(scanner))
 	case 2:
-		part2.Solve(scanner)
+		fmt.Println("Part2")
+		fmt.Printf("Answer: %d \n", part2.Solve(scanner))
 	}
-
 }

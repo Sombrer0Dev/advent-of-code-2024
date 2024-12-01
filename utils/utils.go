@@ -1,18 +1,8 @@
 package utils
 
-import (
-	"bufio"
-	"log"
-	"os"
-)
-
-func ReadInput(path string) *bufio.Scanner {
-	file, err := os.Open(path)
-	if err != nil {
-		log.Fatal(err)
+func Abs(x int) int {
+	if x > 0 {
+		return x
 	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	return scanner
+	return -x
 }
