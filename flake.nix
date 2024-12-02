@@ -37,13 +37,13 @@
             vendorHash = null;
             subPackages = [
               "day1"
-              # "day2"
+              "day2"
             ];
           };
         };
         apps = {
           day1 = mkApp "day1";
-          # day2 = mkApp "day2";
+          day2 = mkApp "day2";
         };
 
         devShells.default = pkgs.mkShell {
